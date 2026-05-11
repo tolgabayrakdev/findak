@@ -18,14 +18,14 @@ export default class PersonService {
     return rest;
   }
 
-  async create(userId, { firstName, lastName, phone }) {
-    const { userId: _, ...person } = await this.personRepository.create({ firstName, lastName, phone, userId });
+  async create(userId, personData) {
+    const { userId: _, ...person } = await this.personRepository.create({ ...personData, userId });
     return person;
   }
 
-  async update(id, userId, { firstName, lastName, phone }) {
+  async update(id, userId, personData) {
     await this.getById(id, userId);
-    await this.personRepository.update(id, userId, { firstName, lastName, phone });
+    await this.personRepository.update(id, userId, personData);
     const { userId: _, ...person } = await this.personRepository.findById(id, userId);
     return person;
   }
