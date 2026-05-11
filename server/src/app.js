@@ -4,6 +4,8 @@ import morgan from "morgan";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import { config } from "./config/environment.js";
+import personRoutes from "./routes/person.routes.js";
+import errorHandler from "./middleware/errorHandler.js";
 
 const app = express();
 
@@ -22,6 +24,10 @@ app.use(cookieParser());
 app.get("/", (req, res) => {
     res.send("Hello, World!");
 });
+
+app.use("/api/persons", personRoutes);
+
+app.use(errorHandler);
 
 export default app;
 
