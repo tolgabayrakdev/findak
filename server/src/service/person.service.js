@@ -7,25 +7,27 @@ export default class PersonService {
   }
 
   async getAll(userId) {
-    return this.personRepository.findAll(userId);
+    const persons = await this.personRepository.findAll(userId);
+    return persons.map(({ userId: _, ...person }) => person);
   }
 
   async getById(id, userId) {
     const person = await this.personRepository.findById(id, userId);
     if (!person) throw new NotFoundException('Person not found');
+    const { userId: _, ...rest } = person;
+    return rest;
+  }
+
+  async create(userId, { firstName, lastName, phone }) {
+    const { userId: _, ...person } = await this.personRepository.create({ firstName, lastName, phone, userId });
     return person;
   }
 
-  async create(userId, body) {
-    const { firstName, lastName, phone } = body;
-    return this.personRepository.create({ firstName, lastName, phone, userId });
-  }
-
-  async update(id, userId, body) {
+  async update(id, userId, { firstName, lastName, phone }) {
     await this.getById(id, userId);
-    const { firstName, lastName, phone } = body;
     await this.personRepository.update(id, userId, { firstName, lastName, phone });
-    return this.personRepository.findById(id, userId);
+    const { userId: _, ...person } = await this.personRepository.findById(id, userId);
+    return person;
   }
 
   async delete(id, userId) {

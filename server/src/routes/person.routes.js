@@ -1,13 +1,18 @@
 import { Router } from 'express';
-import PersonController from '../controller/person.controller.js';
+import { PersonController } from '../controller/person.controller.js';
+import { authenticate } from '../middleware/authenticate.js';
+import { validate } from '../middleware/validate.js';
+import { createPersonSchema, updatePersonSchema } from '../schemas/person.schema.js';
 
 const router = Router();
 const personController = new PersonController();
 
-router.get('/', (req, res) => personController.getAll(req, res));
-router.get('/:id', (req, res) => personController.getById(req, res));
-router.post('/', (req, res) => personController.create(req, res));
-router.put('/:id', (req, res) => personController.update(req, res));
-router.delete('/:id', (req, res) => personController.delete(req, res));
+router.use(authenticate);
+
+router.get('/', personController.getAll);
+router.get('/:id', personController.getById);
+router.post('/', validate(createPersonSchema), personController.create);
+router.put('/:id', validate(updatePersonSchema), personController.update);
+router.delete('/:id', personController.delete);
 
 export default router;

@@ -4,6 +4,7 @@ import morgan from "morgan";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import { config } from "./config/environment.js";
+import authRoutes from "./routes/auth.routes.js";
 import personRoutes from "./routes/person.routes.js";
 import errorHandler from "./middleware/errorHandler.js";
 
@@ -25,6 +26,7 @@ app.get("/", (req, res) => {
     res.send("Hello, World!");
 });
 
+app.use("/api/auth", authRoutes);
 app.use("/api/persons", personRoutes);
 
 app.use(errorHandler);
