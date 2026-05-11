@@ -11,7 +11,7 @@ export const config = {
   databaseUrl: process.env.DATABASE_URL,
 
   // JWT
-  jwtSecret: process.env.JWT_SECRET || (process.env.NODE_ENV === 'production' ? (() => { throw new Error('JWT_SECRET must be set in production'); })() : 'dev_secret_changeme'),
+  jwtSecret: process.env.JWT_SECRET || 'your_jwt_secret',
 
   // Flags
   isDevelopment: process.env.NODE_ENV === 'development',
