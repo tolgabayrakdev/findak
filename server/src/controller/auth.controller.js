@@ -48,7 +48,7 @@ export class AuthController {
       if (req.user?.id) await this.authService.logout(req.user.id);
       res
         .clearCookie('accessToken')
-        .clearCookie('refreshToken')
+        .clearCookie('refreshToken', { path: '/api/auth/refresh' })
         .json({ message: 'Logged out successfully' });
     } catch (err) {
       next(err);
