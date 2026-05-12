@@ -24,10 +24,10 @@ export default class PersonService {
   }
 
   async update(id, userId, personData) {
-    await this.getById(id, userId);
-    await this.personRepository.update(id, userId, personData);
-    const { userId: _, ...person } = await this.personRepository.findById(id, userId);
-    return person;
+    const person = await this.personRepository.update(id, userId, personData);
+    if (!person) throw new NotFoundException('Person not found');
+    const { userId: _, ...rest } = person;
+    return rest;
   }
 
   async delete(id, userId) {

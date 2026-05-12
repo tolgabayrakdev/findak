@@ -7,6 +7,7 @@ import { config } from "./config/environment.js";
 import authRoutes from "./routes/auth.routes.js";
 import personRoutes from "./routes/person.routes.js";
 import errorHandler from "./middleware/errorHandler.js";
+import { generalLimiter } from "./middleware/rateLimit.js";
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(generalLimiter);
 
 // Routes
 app.get("/", (req, res) => {

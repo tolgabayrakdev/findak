@@ -1,4 +1,4 @@
-import { validateToken } from '../helpers/jwt.helper.js';
+import { validateToken } from '../helper/jwt.helper.js';
 import { config } from '../config/environment.js';
 import UnauthorizedException from '../exceptions/UnauthorizedException.js';
 

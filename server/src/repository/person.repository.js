@@ -19,10 +19,9 @@ export default class PersonRepository {
   }
 
   async update(id, userId, data) {
-    return prisma.person.updateMany({
-      where: { id, userId },
-      data,
-    });
+    const result = await prisma.person.updateMany({ where: { id, userId }, data });
+    if (result.count === 0) return null;
+    return prisma.person.findUnique({ where: { id } });
   }
 
   async delete(id, userId) {
