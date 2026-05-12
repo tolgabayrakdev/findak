@@ -15,9 +15,7 @@ export class AuthService {
     if (existing) throw new BadRequestException('Email already in use');
 
     const hashedPassword = await bcrypt.hash(userData.password, 10);
-    const user = await this.authRepository.create({ ...userData, password: hashedPassword });
-
-    return this.#issueTokens(user);
+    await this.authRepository.create({ ...userData, password: hashedPassword });
   }
 
   async login(credentials) {

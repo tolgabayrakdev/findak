@@ -1,15 +1,6 @@
 import { AuthService } from '../service/auth.service.js';
-import { config } from '../config/environment.js';
+import { ACCESS_COOKIE_OPTIONS, REFRESH_COOKIE_OPTIONS } from '../config/cookie.config.js';
 import UnauthorizedException from '../exceptions/UnauthorizedException.js';
-
-const BASE_COOKIE = {
-  httpOnly: true,
-  secure: config.isProduction,
-  sameSite: 'strict',
-};
-
-const ACCESS_COOKIE_OPTIONS = { ...BASE_COOKIE, maxAge: 15 * 60 * 1000 };
-const REFRESH_COOKIE_OPTIONS = { ...BASE_COOKIE, maxAge: 7 * 24 * 60 * 60 * 1000 };
 
 export class AuthController {
   constructor() {
@@ -18,12 +9,8 @@ export class AuthController {
 
   register = async (req, res, next) => {
     try {
-      const { accessToken, refreshToken } = await this.authService.register(req.body);
-      res
-        .cookie('accessToken', accessToken, ACCESS_COOKIE_OPTIONS)
-        .cookie('refreshToken', refreshToken, REFRESH_COOKIE_OPTIONS)
-        .status(201)
-        .json({ message: 'Registered successfully' });
+      await this.authService.register(req.body);
+      res.status(201).json({ message: 'Registered successfully' });
     } catch (err) {
       next(err);
     }
