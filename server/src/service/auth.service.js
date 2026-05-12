@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import { AuthRepository } from '../repository/auth.repository.js';
-import { generateAccessToken, generateRefreshToken, validateToken, hashToken } from '../helpers/jwt.helper.js';
+import { generateAccessToken, generateRefreshToken, validateToken, hashToken } from '../helper/jwt.helper.js';
 import { config } from '../config/environment.js';
 import BadRequestException from '../exceptions/BadRequestException.js';
 import UnauthorizedException from '../exceptions/UnauthorizedException.js';
