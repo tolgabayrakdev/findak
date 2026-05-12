@@ -12,6 +12,7 @@ export const config = {
 
   // JWT
   jwtSecret: process.env.JWT_SECRET || 'your_jwt_secret',
+  jwtRefreshSecret: process.env.JWT_REFRESH_SECRET || 'your_jwt_refresh_secret',
 
   // Flags
   isDevelopment: process.env.NODE_ENV === 'development',
