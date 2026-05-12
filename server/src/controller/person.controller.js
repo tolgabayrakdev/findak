@@ -25,7 +25,7 @@ export class PersonController {
     try {
       const person = await this.personService.create(req.user.id, req.body);
       res.status(201).json(person);
-    } catch (err) {      
+    } catch (err) {
       next(err);
     }
   };

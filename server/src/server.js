@@ -1,7 +1,7 @@
 import 'dotenv/config';
-import app from "./app.js";
-import { config } from "./config/environment.js";
-import { prisma } from "./lib/prisma.js";
+import app from './app.js';
+import { config } from './config/environment.js';
+import { prisma } from './lib/prisma.js';
 
 const server = app.listen(config.port, () => {
   console.log(`Server is running on port ${config.port}`);

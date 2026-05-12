@@ -1,5 +1,10 @@
 import bcrypt from 'bcrypt';
-import { generateAccessToken, generateRefreshToken, validateToken, hashToken } from '../helper/jwt.helper.js';
+import {
+  generateAccessToken,
+  generateRefreshToken,
+  validateToken,
+  hashToken,
+} from '../helper/jwt.helper.js';
 import { config } from '../config/environment.js';
 import BadRequestException from '../exceptions/BadRequestException.js';
 import UnauthorizedException from '../exceptions/UnauthorizedException.js';
