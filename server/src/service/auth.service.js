@@ -1,13 +1,12 @@
 import bcrypt from 'bcrypt';
-import { AuthRepository } from '../repository/auth.repository.js';
 import { generateAccessToken, generateRefreshToken, validateToken, hashToken } from '../helper/jwt.helper.js';
 import { config } from '../config/environment.js';
 import BadRequestException from '../exceptions/BadRequestException.js';
 import UnauthorizedException from '../exceptions/UnauthorizedException.js';
 
 export class AuthService {
-  constructor() {
-    this.authRepository = new AuthRepository();
+  constructor(authRepository) {
+    this.authRepository = authRepository;
   }
 
   async register(userData) {

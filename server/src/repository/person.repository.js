@@ -1,6 +1,6 @@
 import { prisma } from '../lib/prisma.js';
 
-export default class PersonRepository {
+export class PersonRepository {
   async findAll(userId) {
     return prisma.person.findMany({
       where: { userId },

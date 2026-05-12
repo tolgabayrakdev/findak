@@ -1,8 +1,6 @@
-import PersonService from '../service/person.service.js';
-
 export class PersonController {
-  constructor() {
-    this.personService = new PersonService();
+  constructor(personService) {
+    this.personService = personService;
   }
 
   getAll = async (req, res, next) => {

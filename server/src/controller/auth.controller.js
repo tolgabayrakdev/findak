@@ -1,10 +1,9 @@
-import { AuthService } from '../service/auth.service.js';
 import { ACCESS_COOKIE_OPTIONS, REFRESH_COOKIE_OPTIONS } from '../config/cookie.config.js';
 import UnauthorizedException from '../exceptions/UnauthorizedException.js';
 
 export class AuthController {
-  constructor() {
-    this.authService = new AuthService();
+  constructor(authService) {
+    this.authService = authService;
   }
 
   register = async (req, res, next) => {

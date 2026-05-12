@@ -1,9 +1,8 @@
-import PersonRepository from '../repository/person.repository.js';
 import NotFoundException from '../exceptions/NotFoundException.js';
 
-export default class PersonService {
-  constructor() {
-    this.personRepository = new PersonRepository();
+export class PersonService {
+  constructor(personRepository) {
+    this.personRepository = personRepository;
   }
 
   async getAll(userId) {
